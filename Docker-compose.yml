@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbitmq"
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
+
+  spring-chat:
+    restart: always
+    build: ./
+    volumes:
+      - ~/.m2:/root/.m2
+    ports:
+      - 9090:9090
+    command: mvn clean spring-boot:run
+    depends_on:
+      - rabbitmq
+    container_name: spring-chat
