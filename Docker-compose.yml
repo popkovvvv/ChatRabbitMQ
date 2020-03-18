@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 
 services:
   rabbitmq:
@@ -14,8 +14,10 @@ services:
 
   spring-chat:
     restart: always
-    build: ./
+    build: ./server
+    working_dir: /server
     volumes:
+      - ./server:/server
       - ~/.m2:/root/.m2
     ports:
       - 9090:9090
