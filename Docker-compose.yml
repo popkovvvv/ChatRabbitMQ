@@ -12,16 +12,16 @@ services:
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
 
-  spring-chat:
-    restart: always
-    build: ./server
-    working_dir: /server
-    volumes:
-      - ./server:/server
-      - ~/.m2:/root/.m2
-    ports:
-      - 9090:9090
-    command: mvn clean spring-boot:run
-    depends_on:
-      - rabbitmq
-    container_name: spring-chat
+  server:
+      restart: always
+      container_name: spring
+      build: ./server
+      working_dir: /server
+      volumes:
+        - ./server:/server
+        - ~/.m2:/root/.m2
+      expose:
+        - 8080
+      ports:
+        - 8080:8080
+      command: mvn clean spring-boot:run
