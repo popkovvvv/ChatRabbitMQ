@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbitmq"
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
+
   server:
       restart: always
       container_name: spring

@@ -18,8 +18,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/app");
 
         registry.enableStompBrokerRelay("/topic")
-                .setRelayHost("localhost")
-                .setRelayPort(61613)
+                .setRelayHost("rabbit")
+                .setRelayPort(5672)
                 .setClientLogin("guest")
                 .setClientPasscode("guest");
 
